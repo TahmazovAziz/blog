@@ -1,0 +1,31 @@
+{% extends "main/base.html" %}
+{%block links%}
+<li class="nav-item"><a href="{% url "home" %}" class="nav-link" aria-current="page">Все блоги</a></li>
+<li class="nav-item"><a href="{% url 'news' %}" class="nav-link ">Новостные</a></li>
+<li class="nav-item"><a href="{% url 'history' %}" class="nav-link">Обычные</a></li>
+<li class="nav-item"><a href="{% url 'blogs_create' %}" class="nav-link active">Создания</a></li>
+{%endblock%}
+{%block content%}
+<div class="container">
+
+    <form method="post" enctype="multipart/form-data">
+        {{form.text}}<br><br>
+        {{form.date}}<br><br>
+        картина:{{form.image}}<br><br>
+        видео:{{form.video}}<br><br>
+        {{form.category}}<br>
+        {% csrf_token %}
+        <br>
+        <button type='submit' class="btn btn-primary ">Создать</button>
+        <br><br>
+        <ul>
+            <li>
+                <p>Категория 1 - Новостная запись</p>
+            </li>
+            <li>
+                <p>Категория 2 - Истории</p>
+            </li>
+        </ul>
+    </form>
+</div>
+{% endblock %}

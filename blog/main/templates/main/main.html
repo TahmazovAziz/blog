@@ -1,0 +1,40 @@
+{% extends "main/base.html" %}
+{%block title%}Main{%endblock%}
+{%block links%}
+<li class="nav-item"><a href="{% url "home" %}" class="nav-link active" aria-current="page">Все блоги</a></li>
+<li class="nav-item"><a href="{% url 'news' %}" class="nav-link ">Новостные</a></li>
+<li class="nav-item"><a href="{% url 'history' %}" class="nav-link">Обычные</a></li>
+<li class="nav-item"><a href="{% url 'blogs_create' %}" class="nav-link">Создания</a></li>
+{%endblock%}
+{% block content %}
+<div class="album py-5">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for items in blogs %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    {% if items.image %}
+                        <img src="media/{{items.image}}"  alt="">
+                    {% endif %}
+                    {% if items.video %}
+                    <video src="media/{{items.video}}"></video>                   
+                    {% endif %}
+                    <div class="card-body">
+
+                        <p class="card-text">{{items.text}}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="{% url 'blog' items.id %}" class="btn btn-sm btn-outline-secondary">View</a>
+                                <a href="{% url 'blogs_update' items.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                            </div>
+                            <small class="text-body-secondary">{{items.date}}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            {% endfor %}
+        </div>
+  </div>
+
+{% endblock  %}

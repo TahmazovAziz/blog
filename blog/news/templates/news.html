@@ -1,0 +1,22 @@
+{% extends "main/base.html" %}
+{%block links%}
+<li class="nav-item"><a href="{% url "home" %}" class="nav-link" aria-current="page">Все блоги</a></li>
+<li class="nav-item"><a href="{% url 'news' %}" class="nav-link active">Новостные</a></li>
+<li class="nav-item"><a href="{% url 'history' %}" class="nav-link">Обычные</a></li>
+<li class="nav-item"><a href="{% url 'blogs_create' %}" class="nav-link">Создания</a></li>
+{%endblock%}
+{%block content%}
+<div class="container">
+    {% for item in news %}
+    <h1  style="text-align: center;">{{item.text}}</h1>
+    {% if item.image %}
+       <img src="/media/{{item.image}}" style="margin-left: 40%;"  alt="">
+    {% endif %}
+
+    {% if item.video %}
+        <video src="media/{{item.video}}"></video>
+    {% endif %}
+    <p style="text-align: center;">{{item.date}}</p>
+    {% endfor %}
+    <div>
+{%endblock%}
